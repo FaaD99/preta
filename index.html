@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="imgjpeg" href="logop.jpeg">
+  <title>PrêtA.</title>
+
+  <style>
+    :root {
+      --ivory: #faf8f3;
+      --cream: #f2ebe0;
+      --gold: #b9975b;
+      --sage: #a8b5a2;
+      --dark: #302923;
+      --muted: #746b64;
+      --white: #ffffff;
+      --shadow: 0 15px 35px rgba(48, 41, 35, .10);
+      --red-dark: #7d4336;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--ivory);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1150px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #efe2c9;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e9e1d7;
+    }
+
+    .header-content {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #111111;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 22px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--gold);
+      color: white;
+      box-shadow: 0 8px 20px rgba(185, 151, 91, .25);
+    }
+
+    .button-secondary {
+      background: white;
+      border: 1px solid #e5ddd2;
+      color: var(--dark);
+    }
+
+    .hero {
+      padding: 90px 0 70px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top right, #e4eadf, transparent 35%),
+        linear-gradient(180deg, #fffdf9, var(--ivory));
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      font-size: .75rem;
+      font-weight: bold;
+    }
+
+    h1,
+    h2,
+    .invitation-names {
+      font-family: Georgia, serif;
+      font-weight: normal;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 20px auto;
+      font-size: clamp(2.7rem, 6vw, 5.5rem);
+      line-height: 1;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    section {
+      padding: 75px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    .pricing-grid,
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pricing-card,
+    .model-card {
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid #e7ded3;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .pricing-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid var(--gold);
+      transform: translateY(-8px);
+    }
+
+    .badge {
+      display: inline-block;
+      width: fit-content;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: #efe2c9;
+      color: #80632c;
+      font-size: .75rem;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .pricing-card h3 {
+      font-family: Georgia, serif;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: var(--gold);
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin: 12px 0 18px;
+    }
+
+    .pricing-card ul {
+      list-style: none;
+      color: var(--muted);
+      margin-bottom: 25px;
+    }
+
+    .pricing-card li {
+      margin-bottom: 8px;
+    }
+
+    .pricing-card li::before {
+      content: "✓";
+      color: var(--gold);
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .pricing-card .button {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    #modeles {
+      background: #f4eee6;
+    }
+
+    .model-category {
+      margin-bottom: 55px;
+    }
+
+    .model-category h3 {
+      font-family: Georgia, serif;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 22px;
+    }
+
+    .model-card-image {
+      height: 260px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .model-card-content {
+      padding: 21px;
+    }
+
+    .model-card h4 {
+      font-family: Georgia, serif;
+      font-size: 1.35rem;
+      margin-bottom: 6px;
+    }
+
+    .model-card p {
+      color: var(--muted);
+      font-size: .94rem;
+      min-height: 48px;
+      margin-bottom: 17px;
+    }
+
+    .model-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .model-actions .button {
+      flex: 1;
+      min-width: 130px;
+      padding: 11px 13px;
+      font-size: .88rem;
+    }
+
+    .preview {
+      background: linear-gradient(135deg, #fffdf9, #e9eee6);
+    }
+
+    .invitation {
+      max-width: 850px;
+      margin: auto;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .invitation-cover {
+      min-height: 360px;
+      padding: 40px 20px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(60, 36, 31, 0.55), rgba(60, 36, 31, 0.55)),
+        url("wedding2.jpg")
+        center/cover no-repeat;
+    }
+
+    .invitation-cover-content {
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,.6);
+      background: rgba(0,0,0,.12);
+    }
+
+    .invitation-names {
+      font-size: clamp(2.5rem, 6vw, 4.7rem);
+      line-height: 1;
+    }
+
+    .invitation-cover p {
+      margin-top: 18px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .75rem;
+    }
+
+    .invitation-content {
+      padding: 35px;
+      text-align: center;
+    }
+
+    .invitation-content h3 {
+      font-family: Georgia, serif;
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .invitation-content p {
+      max-width: 570px;
+      margin: 0 auto 25px;
+      color: var(--muted);
+    }
+
+    .rsvp {
+      margin-top: 25px;
+    }
+    .rsvp1{
+      background: #7d4336;
+         display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    border-radius: 999px;
+    padding: 13px 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+    color: white;
+}
+    
+  .details {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 600px;
+      margin: 34px auto 0;
+    }
+
+    .detail {
+      padding: 18px 10px;
+      border: 1px solid var(--cream-2);
+      background: rgba(255, 253, 250, 0.8);
+    }
+
+    .detail strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--red-dark);
+      font-family: Georgia, serif;
+      font-size: 1.05rem;
+      font-style: italic;
+    }
+
+    .detail span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .foot{
+       padding: 5px;
+      background: var(--red-dark);
+      color: #f6ece4;
+      text-align: center;
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: 12px;
+    }
+    
+
+    .footer {
+      padding: 28px 0;
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      font-size: .9rem;
+    }
+    
+    /* Exemples détaillés des formules */
+
+.offer-examples {
+  background: #fffdf9;
+}
+
+.offer-example {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: center;
+  margin-bottom: 70px;
+  padding: 28px;
+  background: rgba(255, 255, 255, .78);
+  border: 1px solid #e7ded3;
+  border-radius: 26px;
+  box-shadow: var(--shadow);
+}
+
+.offer-example.reverse .offer-example-preview {
+  order: 2;
+}
+
+.offer-example.reverse .offer-example-content {
+  order: 1;
+}
+
+.offer-example-preview {
+  overflow: hidden;
+  min-height: 390px;
+  border-radius: 20px;
+  background: var(--cream);
+  box-shadow: 0 12px 25px rgba(48, 41, 35, .12);
+}
+
+.simple-preview {
+  min-height: 390px;
+  padding: 35px 24px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  background:
+    linear-gradient(rgba(35, 29, 24, .38), rgba(35, 29, 24, .38)),
+    url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=85")
+    center/cover;
+}
+
+.simple-preview-inner {
+  width: min(100%, 520px);
+  padding: 32px 22px;
+  border: 1px solid rgba(255, 255, 255, .7);
+  background: rgba(0, 0, 0, .15);
+}
+
+.simple-preview .preview-names,
+.premium-preview .preview-names,
+.custom-preview .preview-names {
+  font-family: Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.7rem);
+  line-height: 1;
+}
+
+.simple-preview p {
+  margin-top: 18px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: .72rem;
+}
+
+.simple-preview-date {
+  margin-top: 25px;
+  font-family: Georgia, serif;
+  font-size: 1.2rem;
+}
+
+.premium-preview {
+  min-height: 390px;
+  padding: 28px;
+  background:
+    linear-gradient(rgba(35, 29, 24, .3), rgba(35, 29, 24, .3)),
+    url("love.jpg")
+    center/cover;
+  color: white;
+  text-align: center;
+}
+
+.premium-preview-inner {
+  height: 100%;
+  min-height: 334px;
+  padding: 28px 20px;
+  border: 1px solid rgba(255, 255, 255, .65);
+  background: rgba(0, 0, 0, .16);
+}
+
+.premium-preview p {
+  margin-top: 14px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-size: .7rem;
+}
+
+.premium-countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.premium-countdown div {
+  padding: 10px 4px;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: 10px;
+}
+
+.premium-countdown strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+}
+
+.premium-countdown span {
+  font-size: .62rem;
+  text-transform: uppercase;
+}
+
+.custom-preview {
+  min-height: 390px;
+  padding: 35px 25px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: white;
+  background:
+    linear-gradient(rgba(35, 29, 24, .42), rgba(35, 29, 24, .42)),
+    url("https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=1000&q=85")
+    center/cover;
+}
+
+.custom-preview-inner {
+  padding: 34px 25px;
+  border: 1px solid rgba(255, 255, 255, .7);
+  background: rgba(0, 0, 0, .18);
+}
+
+.custom-preview small {
+  display: block;
+  margin-bottom: 16px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: .7rem;
+}
+
+.offer-example-content h3 {
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.offer-example-content > p {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.offer-list {
+  list-style: none;
+  margin-bottom: 24px;
+}
+
+.offer-list li {
+  color: var(--muted);
+  margin-bottom: 9px;
+}
+
+.offer-list li::before {
+  content: "✓";
+  color: var(--gold);
+  font-weight: bold;
+  margin-right: 9px;
+}
+
+.offer-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.offer-detail {
+  padding: 14px;
+  border-radius: 14px;
+  background: #f6f0e8;
+}
+
+.offer-detail strong {
+  display: block;
+  font-family: Georgia, serif;
+  margin-bottom: 3px;
+}
+
+.offer-detail span {
+  color: var(--muted);
+  font-size: .87rem;
+}
+
+.schedule {
+  list-style: none;
+  margin: 15px 0 24px;
+  color: var(--muted);
+}
+
+.schedule li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee4d8;
+}
+
+.schedule li strong {
+  color: var(--dark);
+  margin-right: 8px;
+}
+
+@media (max-width: 850px) {
+  .offer-example {
+    grid-template-columns: 1fr;
+  }
+
+  .offer-example.reverse .offer-example-preview,
+  .offer-example.reverse .offer-example-content {
+    order: initial;
+  }
+}
+
+@media (max-width: 560px) {
+  .offer-details {
+    grid-template-columns: 1fr;
+  }
+
+  .premium-countdown {
+    gap: 5px;
+  }
+
+  .premium-countdown strong {
+    font-size: 1.2rem;
+  }
+}
+
+    @media (max-width: 850px) {
+      .pricing-grid,
+      .models-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .pricing-grid,
+      .models-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-card.featured {
+        transform: none;
+      }
+
+      .header-content > .button {
+        padding: 10px 14px;
+        font-size: .8rem;
+      }
+
+      .invitation-content {
+        padding: 25px 18px;
+      }
+    }
+    
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="container header-content">
+      <a href="#" class="logo">PrêtA.</a>
+
+      <nav>
+        <a href="#formules">Formules</a>
+        <a href="#modeles">Modèles</a>
+        <a href="#exemple">Exemple</a>
+      </nav>
+
+      <a
+        class="button button-primary"
+        href="https://wa.me/221777600698?text=Bonjour%20PrêtA%2C%20je%20souhaite%20commander%20une%20invitation."
+        target="_blank"
+      >
+        Commander
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">Invitations de mariage digitales</span>
+        <h1>Une invitation élégante pour un jour inoubliable.</h1>
+        <p>
+          Choisissez un modèle déjà prêt, personnalisez vos informations et
+          partagez votre invitation avec vos proches.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#formules" class="button button-primary">
+            Voir les formules
+          </a>
+
+          <a href="#modeles" class="button button-secondary">
+            Voir les modèles
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="formules">
+      <div class="container">
+        <div class="section-title">
+          <h2>Choisissez votre formule</h2>
+          <p>Chaque formule donne accès à des modèles prêts à utiliser.</p>
+        </div>
+
+        <div class="pricing-grid">
+
+          <article class="pricing-card">
+            <span class="badge">Essentielle</span>
+            <h3>Invitation Simple</h3>
+            <div class="price">10 000 FCFA</div>
+
+            <ul>
+              <li>Modèles simples</li>
+              <li>Prénoms et date</li>
+              <li>Lieu de cérémonie</li>
+              <li>Lien partageable</li>
+            </ul>
+
+            <a href="#exemple-simple" class="button button-secondary">
+               Voir les modèles
+            </a>
+          </article>
+
+          <article class="pricing-card featured">
+            <span class="badge">La plus choisie</span>
+            <h3>Invitation Premium</h3>
+            <div class="price">25 000 FCFA</div>
+
+            <ul>
+              <li>Modèles haut de gamme</li>
+              <li>Galerie photo</li>
+              <li>Compte à rebours</li>
+              <li>Confirmation RSVP</li>
+              <li>QR code</li>
+            </ul>
+
+            <a href="#exemple-premium" class="button button-primary">
+               Voir l'exemple
+            </a>
+          </article>
+
+          <article class="pricing-card">
+            <span class="badge">Sur mesure</span>
+            <h3>Création personnalisée</h3>
+            <div class="price">Dès 50 000 FCFA</div>
+
+            <ul>
+              <li>Design créé pour vous</li>
+              <li>Couleurs personnalisées</li>
+              <li>Typographies au choix</li>
+              <li>Accompagnement personnalisé</li>
+            </ul>
+
+            <a href="#exemple-sur-mesure" class="button button-secondary">
+               Voir l'exemple
+            </a>
+              
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="offer-examples">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Découvrez chaque formule</h2>
+      <p>
+        Chaque offre possède son propre style et ses propres fonctionnalités.
+      </p>
+    </div>
+
+    <!-- FORMULE SIMPLE -->
+    <article class="offer-example" id="exemple-simple">
+      <div class="offer-example-preview">
+        <div class="simple-preview">
+          <div class="simple-preview-inner">
+            <div class="preview-names">Rama &amp; Abdoul</div>
+            <p>Vous invitent à célébrer leur mariage</p>
+            <div class="simple-preview-date">
+              Samedi 26 Septembre 2026<br />
+              Dakar, Sénégal
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-example-content">
+        <span class="badge">10 000 FCFA</span>
+        <h3>Invitation Simple</h3>
+
+        <p>
+          Une invitation élégante et essentielle pour annoncer votre mariage
+          avec style, sans fonctionnalités compliquées.
+        </p>
+
+        <div class="offer-details">
+          <div class="offer-detail">
+            <strong>1 modèle</strong>
+            <span>Au choix parmi les modèles simples</span>
+          </div>
+
+          <div class="offer-detail">
+            <strong>Lien partageable</strong>
+            <span>À envoyer par WhatsApp</span>
+          </div>
+        </div>
+
+        <ul class="offer-list">
+          <li>Prénoms des mariés</li>
+          <li>Date et heure de la cérémonie</li>
+          <li>Lieu du mariage</li>
+          <li>Texte personnalisé</li>
+          <li>Image de couverture</li>
+          <li>Bouton de confirmation simple</li>
+        </ul>
+
+        <a
+          class="button button-primary"
+          href="https://wa.me/221777600698?text=Bonjour%20PrêtA2C%20je%20souhaite%20commander%20la%20formule%20Simple%20à%2010%20000%20FCFA."
+          target="_blank"
+        >
+          Choisir cette formule
+        </a>
+      </div>
+    </article>
+
+    <!-- FORMULE PREMIUM -->
+    <article class="offer-example reverse" id="exemple-premium">
+      <div class="offer-example-preview">
+        <div class="premium-preview">
+          <div class="premium-preview-inner">
+            <div class="preview-names">Maria &amp; Roger</div>
+            <p>Notre histoire continue...</p>
+
+            <div class="premium-countdown">
+              <div>
+                <strong>120</strong>
+                <span>Jours</span>
+              </div>
+
+              <div>
+                <strong>08</strong>
+                <span>Heures</span>
+              </div>
+
+              <div>
+                <strong>42</strong>
+                <span>Minutes</span>
+              </div>
+
+              <div>
+                <strong>15</strong>
+                <span>Secondes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-example-content">
+        <span class="badge">25 000 FCFA</span>
+        <h3>Invitation Premium</h3>
+
+        <p>
+          Une expérience complète pour présenter votre mariage, informer vos
+          invités et recevoir leurs confirmations.
+        </p>
+
+        <div class="offer-details">
+          <div class="offer-detail">
+            <strong>Compte à rebours</strong>
+            <span>Jusqu'au grand jour</span>
+          </div>
+
+          <div class="offer-detail">
+            <strong>Galerie photo</strong>
+            <span>Plusieurs photos des mariés</span>
+          </div>
+        </div>
+
+        <ul class="offer-list">
+          <li>Tout le contenu de la formule Simple</li>
+          <li>Compte à rebours automatique</li>
+          <li>Galerie de photos</li>
+          <li>Programme détaillé</li>
+          <li>Informations pratiques</li>
+          <li>Formulaire RSVP détaillé</li>
+          <li>QR code et bouton WhatsApp</li>
+        </ul>
+
+        <h4>Exemple de programme</h4>
+
+        <ul class="schedule">
+          <li><strong>15h30</strong> Accueil des invités</li>
+          <li><strong>16h00</strong> Cérémonie</li>
+          <li><strong>18h00</strong> Séance photos</li>
+          <li><strong>19h30</strong> Cocktail</li>
+          <li><strong>20h30</strong> Dîner et soirée</li>
+        </ul>
+
+        <a
+          class="button button-primary"
+          href="https://wa.me/221777600698?text=Bonjour%20PrêtA2C%20je%20souhaite%20commander%20la%20formule%20Premium%20à%2025%20000%20FCFA."
+          target="_blank"
+        >
+          Choisir cette formule
+        </a>
+      </div>
+    </article>
+
+    <!-- FORMULE SUR MESURE -->
+    <article class="offer-example" id="exemple-sur-mesure">
+      <div class="offer-example-preview">
+        <div class="custom-preview">
+          <div class="custom-preview-inner">
+            <small>Création exclusive</small>
+            <div class="preview-names">Votre histoire</div>
+            <p>Un design créé spécialement pour vous</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-example-content">
+        <span class="badge">À partir de 50 000 FCFA</span>
+        <h3>Création sur mesure</h3>
+
+        <p>
+          Une invitation unique conçue selon votre thème, vos couleurs, votre
+          culture et l'ambiance souhaitée pour votre mariage.
+        </p>
+
+        <div class="offer-details">
+          <div class="offer-detail">
+            <strong>Design unique</strong>
+            <span>Créé spécialement pour votre couple</span>
+          </div>
+
+          <div class="offer-detail">
+            <strong>Accompagnement</strong>
+            <span>Conseils personnalisés pendant la création</span>
+          </div>
+        </div>
+
+        <ul class="offer-list">
+          <li>Palette de couleurs personnalisée</li>
+          <li>Typographies au choix</li>
+          <li>Motifs traditionnels ou modernes</li>
+          <li>Galerie photo complète</li>
+          <li>Programme détaillé</li>
+          <li>Carte et itinéraire</li>
+          <li>RSVP personnalisé</li>
+          <li>Liste de mariage possible</li>
+        </ul>
+
+        <a
+          class="button button-primary"
+          href="https://wa.me/221777600698?text=Bonjour%20PrêtA%2C%20je%20souhaite%20une%20création%20sur%20mesure%20à%20partir%20de%2050%20000%20FCFA."
+          target="_blank"
+        >
+          Demander une création
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+    <section id="modeles">
+      <div class="container">
+        <div class="section-title">
+          <h2>Choisissez votre invitation</h2>
+          <p>Chaque modèle peut être adapté avec vos informations.</p>
+        </div>
+
+        <div class="model-category" id="simple">
+          <h3>Modèles Simple — 10 000 FCFA</h3>
+
+          <div class="models-grid">
+
+            <article class="model-card">
+              <div
+                class="model-card-image"
+                style="background-image: url('minimalivoire.jpg')"
+              ></div>
+
+              <div class="model-card-content">
+                <h4>Minimal Ivoire</h4>
+                <p>Un modèle doux, lumineux et très épuré.</p>
+
+                <div class="model-actions">
+                  <button class="button button-secondary" onclick="previewModel('Minimal Ivoire')">
+                    Voir la démo
+                  </button>
+
+                  <button class="button button-primary" onclick="chooseModel('Minimal Ivoire', '10 000')">
+                    Choisir
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article class="model-card">
+              <div
+                class="model-card-image"
+                style="background-image: url('classiquebeige.jpg')"
+              ></div>
+
+              <div class="model-card-content">
+                <h4>Classique Beige</h4>
+                <p>Une invitation chaleureuse aux tons naturels.</p>
+
+                <div class="model-actions">
+                  <button class="button button-secondary" onclick="previewModel('Classique Beige')">
+                    Voir la démo
+                  </button>
+
+                  <button class="button button-primary" onclick="chooseModel('Classique Beige', '10 000')">
+                    Choisir
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article class="model-card">
+              <div
+                class="model-card-image"
+                style="background-image: url('terracota.jpg')"
+              ></div>
+
+              <div class="model-card-content">
+                <h4>Terracotta Moderne</h4>
+                <p>Un style moderne avec une touche chaleureuse.</p>
+
+                <div class="model-actions">
+                  <button class="button button-secondary" onclick="previewModel('Terracotta Moderne')">
+                    Voir la démo
+                  </button>
+
+                  <button class="button button-primary" onclick="chooseModel('Terracotta Moderne', '10 000')">
+                    Choisir
+                  </button>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="model-category" id="premium">
+          <h3>Modèles Premium — 25 000 FCFA</h3>
+
+          <div class="models-grid">
+
+            <article class="model-card">
+              <div
+                class="model-card-image"
+                style="background-image: url('floral.jpg')"
+              ></div>
+
+              <div class="model-card-content">
+                <h4>Floral Romantique</h4>
+                <p>Un modèle fleuri, élégant et romantique.</p>
+
+                <div class="model-actions">
+                  <button class="button button-secondary" onclick="previewModel('Floral Romantique')">
+                    Voir la démo
+                  </button>
+
+                  <button class="button button-primary" onclick="chooseModel('Floral Romantique', '25 000')">
+                    Choisir
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article class="model-card">
+              <div
+                class="model-card-image"
+                style="background-image: url('doréélégant.jpg')"
+              ></div>
+
+              <div class="model-card-content">
+                <h4>Doré Élégant</h4>
+                <p>Une invitation luxueuse avec des détails dorés.</p>
+
+                <div class="model-actions">
+                  <button class="button button-secondary" onclick="previewModel('Doré Élégant')">
+                    Voir la démo
+                  </button>
+
+                  <button class="button button-primary" onclick="chooseModel('Doré Élégant', '25 000')">
+                    Choisir
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article class="model-card">
+              <div
+                class="model-card-image"
+                style="background-image: url('vertsauge.jpg')"
+              ></div>
+
+              <div class="model-card-content">
+                <h4>Vert Sauge</h4>
+                <p>Un style naturel, moderne et apaisant.</p>
+
+                <div class="model-actions">
+                  <button class="button button-secondary" onclick="previewModel('Vert Sauge')">
+                    Voir la démo
+                  </button>
+
+                  <button class="button button-primary" onclick="chooseModel('Vert Sauge', '25 000')">
+                    Choisir
+                  </button>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview" id="exemple">
+      <div class="container">
+        <div class="section-title">
+          <h2>Aperçu de votre invitation</h2>
+          <p>Voici un exemple de rendu final de la formule simple.</p>
+        </div>
+
+        <div class="invitation">
+          <div class="invitation-cover">
+            <div class="invitation-cover-content">
+              <div class="invitation-names">Aminata & Moussa</div>
+              <p>Vous invitent à célébrer leur mariage</p>
+            </div>
+          </div>
+
+          <div class="invitation-content">
+            <div class="ornament">✦ ✦ ✦</div>
+            <h3>Notre grand jour</h3>
+            <p>
+              Nous serions heureux de vous compter parmi nous pour célébrer
+              cette journée exceptionnelle.
+            </p>
+            <div class="details">
+        <div class="detail">
+          <strong>Date</strong>
+          <span>14 décembre 2026</span>
+        </div>
+
+        <div class="detail">
+          <strong>Heure</strong>
+          <span>15h30</span>
+        </div>
+
+        <div class="detail">
+          <strong>Lieu</strong>
+          <span>Derklé, Dakar</span>
+        </div>
+      </div>
+
+            <a
+              class="rsvp1" 
+              
+              target="_blank"
+            >
+              Confirmer ma présence
+            </a>
+          </div>
+           <footer class="foot">
+      Aminata &amp; Moussa · Avec amour
+    </footer>
+        </div>
+      </div>
+    </section>
+    
+  </main>
+
+  <footer class="footer">
+    © 2026 PrêtA. — Des invitations créées avec élégance.
+  </footer>
+
+  <script>
+    const numeroWhatsApp = "221777600698";
+  
+
+
+    function chooseModel(nomModele, prix) {
+      const message =
+        `Bonjour PrêtA,%0A%0A` +
+        `Je souhaite commander le modèle : ${nomModele}%0A` +
+        `Formule : ${prix} FCFA.%0A%0A` +
+        `Merci de m'indiquer les prochaines étapes.`;
+
+      window.open(`https://wa.me/${numeroWhatsApp}?text=${message}`, "_blank");
+    }
+
+    function previewModel(nomModele) {
+      document.getElementById("exemple").scrollIntoView({
+        behavior: "smooth"
+      });
+
+      setTimeout(() => {
+        alert(
+          `Aperçu du modèle : ${nomModele}\n\n` +
+          `La version finale sera personnalisée avec vos prénoms, ` +
+          `votre date, votre lieu et vos photos.`
+        );
+      }, 500);
+    }
+  </script>
+
+</body>
+</html>
