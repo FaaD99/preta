@@ -638,6 +638,69 @@
   color: var(--dark);
   margin-right: 8px;
 }
+.premium-demo {
+  max-width: 850px;
+  margin: 70px auto;
+  padding: 45px 25px;
+  border: 1px solid rgba(189, 145, 72, .35);
+  border-radius: 18px;
+  background: #fffaf3;
+  text-align: center;
+  scroll-margin-top: 90px;
+}
+
+.demo-label {
+  margin-bottom: 10px;
+  color: #bd9148;
+  font-family: Arial, sans-serif;
+  font-size: .8rem;
+  font-weight: bold;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.premium-demo h2 {
+  margin-bottom: 15px;
+  color: #5a3930;
+  font-family: Georgia, serif;
+  font-size: 2.3rem;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.premium-demo p {
+  max-width: 600px;
+  margin: 0 auto 28px;
+  color: #77716a;
+  font-family: Arial, sans-serif;
+  line-height: 1.7;
+}
+
+.premium-demo-video {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  background: #000;
+  box-shadow: 0 15px 35px rgba(64, 43, 34, .2);
+}
+
+@media (max-width: 600px) {
+  .premium-demo {
+    margin: 50px auto;
+    padding: 30px 15px;
+  }
+
+  .premium-demo h2 {
+    font-size: 1.6rem;
+  }
+
+  .premium-demo-video {
+    aspect-ratio: 9 / 16;
+  }
+}
 
 @media (max-width: 850px) {
   .offer-example {
@@ -778,7 +841,7 @@
               <li>Galerie photo</li>
               <li>Compte à rebours</li>
               <li>Confirmation RSVP</li>
-              <li>QR code</li>
+              <li>Itinéraire maps</li>
             </ul>
 
             <a href="#exemple-premium" class="button button-primary">
@@ -933,8 +996,8 @@
           <li>Galerie de photos</li>
           <li>Programme détaillé</li>
           <li>Informations pratiques</li>
-          <li>Formulaire RSVP détaillé</li>
-          <li>QR code et bouton WhatsApp</li>
+          <li>RSVP</li>
+          <li>Google maps et bouton WhatsApp</li>
         </ul>
 
         <h4>Exemple de programme</h4>
@@ -949,7 +1012,7 @@
 
         <a
           class="button button-primary"
-          href="https://wa.me/221777600698?text=Bonjour%20PrêtA2C%20je%20souhaite%20commander%20la%20formule%20Premium%20à%2025%20000%20FCFA."
+          href="https://wa.me/221777600698?text=Bonjour%20PrêtA%20je%20souhaite%20commander%20la%20formule%20Premium%20à%2025%20000%20FCFA."
           target="_blank"
         >
           Choisir cette formule
@@ -1111,9 +1174,9 @@
                 <p>Un modèle fleuri, élégant et romantique.</p>
 
                 <div class="model-actions">
-                  <button class="button button-secondary" onclick="previewModel('Floral Romantique')">
-                    Voir la démo
-                  </button>
+                  <a class="button button-secondary" href="#demo-premium">
+                     Voir la démo
+                  </a>
 
                   <button class="button button-primary" onclick="chooseModel('Floral Romantique', '25 000')">
                     Choisir
@@ -1133,9 +1196,10 @@
                 <p>Une invitation luxueuse avec des détails dorés.</p>
 
                 <div class="model-actions">
-                  <button class="button button-secondary" onclick="previewModel('Doré Élégant')">
-                    Voir la démo
-                  </button>
+                  
+                  <a class="button button-secondary" href="#demo-premium">
+                     Voir la démo
+                  </a>
 
                   <button class="button button-primary" onclick="chooseModel('Doré Élégant', '25 000')">
                     Choisir
@@ -1155,9 +1219,9 @@
                 <p>Un style naturel, moderne et apaisant.</p>
 
                 <div class="model-actions">
-                  <button class="button button-secondary" onclick="previewModel('Vert Sauge')">
-                    Voir la démo
-                  </button>
+                  <a class="button button-secondary" href="#demo-premium">
+                     Voir la démo
+                  </a>
 
                   <button class="button button-primary" onclick="chooseModel('Vert Sauge', '25 000')">
                     Choisir
@@ -1170,6 +1234,7 @@
         </div>
       </div>
     </section>
+
 
     <section class="preview" id="exemple">
       <div class="container">
@@ -1223,6 +1288,24 @@
     </footer>
         </div>
       </div>
+    </section>
+
+     <section class="premium-demo" id="demo-premium">
+      <p class="demo-label">Démonstration</p>
+      <h2>Découvrez la formule Premium - thème vert</h2>
+      <p>
+        Découvrez l'ouverture de l'invitation, les animations,
+        les photos, la carte et les fonctionnalités incluses.
+      </p>
+
+      <video
+        class="premium-demo-video"
+        controls
+        playsinline
+        preload="metadata">
+        <source src="Vidéo.mp4" type="video/mp4">
+          Votre navigateur ne prend pas en charge la vidéo.
+      </video>
     </section>
     
   </main>
