@@ -1005,6 +1005,62 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .button-primary,
+.button-secondary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: bouton-bouge 3.5s ease-in-out infinite;
+}
+
+.button-secondary {
+  animation-delay: .2s;
+}
+
+@keyframes bouton-bouge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.button-primary::after,
+.button-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,.32) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  animation: reflet-btn 4.5s ease-in-out infinite;
+}
+
+@keyframes reflet-btn {
+  0%, 30% {
+    transform: translateX(-120%);
+  }
+  65%, 100% {
+    transform: translateX(140%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button-primary,
+  .button-secondary,
+  .button-primary::after,
+  .button-secondary::after {
+    animation: none !important;
+  }
+}
 </style>
 </head>
 
@@ -1046,7 +1102,7 @@
           </a>
 
           <a href="galerie.html" class="button button-secondary">
-            Voir mes modèles
+            Voir nos modèles
           </a>
         </div>
       </div>

@@ -471,7 +471,7 @@
   <main class="gallery-page">
     <div class="container">
       <div class="gallery-title">
-        <h1>Mes modèles d’invitations</h1>
+        <h1>Nos modèles d’invitations</h1>
         <p>Découvrez chaque invitation de mariage en un clic.</p>
       </div>
 
@@ -598,25 +598,61 @@
         });
     }
 
-    function openModel(model) {
-      frame.src = model.link;
-      galleryPage.style.display = "none";
-      detailPage.classList.add("active");
+   // Marque la page actuelle comme étant la galerie
+history.replaceState(
+  { view: "gallery" },
+  "",
+  window.location.href
+);
 
-      orderBtn.onclick = () => {
-        window.open(whatsappLink, "_blank", "noopener,noreferrer");
-      };
+function showModel(model, index) {
+  frame.src = model.link;
+  galleryPage.style.display = "none";
+  detailPage.classList.add("active");
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+  orderBtn.onclick = () => {
+    window.open(whatsappLink, "_blank", "noopener,noreferrer");
+  };
 
-    backToGridBtn.addEventListener("click", () => {
-      detailPage.classList.remove("active");
-      galleryPage.style.display = "";
-      frame.src = "about:blank";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+function showGallery() {
+  detailPage.classList.remove("active");
+  galleryPage.style.display = "";
+  frame.src = "about:blank";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function openModel(model, index) {
+  // Ajoute le détail à l’historique : le geste retour iPhone reviendra à la galerie.
+  history.pushState(
+    { view: "detail", modelIndex: index },
+    "",
+    `#modele-${index + 1}`
+  );
+
+  showModel(model, index);
+}
+
+backToGridBtn.addEventListener("click", () => {
+  if (history.state?.view === "detail") {
+    history.back();
+  } else {
+    showGallery();
+  }
+});
+
+// Gère le geste retour et les boutons précédent/suivant du navigateur.
+window.addEventListener("popstate", (event) => {
+  if (event.state?.view === "detail") {
+    const model = models[event.state.modelIndex];
+    if (model) showModel(model, event.state.modelIndex);
+  } else {
+    showGallery();
+  }
+});
 
     renderGallery();
   </script>
