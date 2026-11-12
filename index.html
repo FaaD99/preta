@@ -761,6 +761,251 @@
     }
     
   </style>
+
+  <style>
+  :root{
+    --ivory:#f7f3ee;
+    --gold:#b9985d;
+    --gold-soft:#e9d7b0;
+    --dark:#2e241f;
+    --muted:#6d615d;
+    --card:#fffdfb;
+    --shadow:0 20px 45px rgba(30,20,17,.12);
+    --phone-border:#171717;
+    --phone-body:#f0f0f0;
+    --whatsapp:#1bb468;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  .gallery-shell{
+    display:none;
+    padding: 30px 0 60px;
+  }
+
+  .gallery-shell.active{
+    display:block;
+  }
+
+  .gallery-header{
+    text-align:center;
+    margin-bottom:28px;
+  }
+
+  .gallery-header h2{
+    font-family: Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 10px;
+    color: var(--dark);
+  }
+
+  .gallery-header p{
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .models-grid-gallery{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap:24px;
+  }
+
+  .gallery-card{
+    background: rgba(255,255,255,.85);
+    border:1px solid #eadfce;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow: var(--shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .gallery-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 24px 50px rgba(30,20,17,.15);
+  }
+
+  .gallery-cover{
+    position:relative;
+    width:100%;
+    height:280px;
+    background-size:cover;
+    background-position:center;
+    cursor:pointer;
+    display:block;
+  }
+
+  .gallery-cover::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(to top, rgba(0,0,0,.18), rgba(0,0,0,0));
+  }
+
+  .gallery-card-body{
+    padding:18px 18px 20px;
+  }
+
+  .gallery-name{
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    color: var(--dark);
+    margin-bottom: 8px;
+    line-height:1.2;
+  }
+
+  .gallery-price{
+    font-size:1.1rem;
+    color: var(--gold);
+    font-weight:700;
+    margin-bottom: 16px;
+  }
+
+  .gallery-btn{
+    width:100%;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    border:none;
+    border-radius:999px;
+    padding: 12px 18px;
+    background: var(--gold);
+    color:white;
+    font-weight:700;
+    cursor:pointer;
+    transition: transform .2s ease;
+  }
+
+  .gallery-btn:hover{
+    transform: translateY(-1px);
+  }
+
+  .gallery-btn.secondary{
+    background: white;
+    border:1px solid #e9dfd2;
+    color: var(--dark);
+  }
+
+  .gallery-detail{
+    display:none;
+    padding: 20px 0 60px;
+  }
+
+  .gallery-detail.active{
+    display:block;
+  }
+
+  .gallery-detail-wrap{
+    max-width: 760px;
+    margin: 0 auto;
+    text-align:center;
+  }
+
+  .phone-mockup{
+    position: relative;
+    width: min(100%, 430px);
+    aspect-ratio: 0.51;
+    margin: 0 auto 22px;
+    border-radius: 40px;
+    background: linear-gradient(145deg, #111, #2c2c2c);
+    box-shadow: 0 30px 70px rgba(17,17,17,.25);
+    padding: 10px;
+    border: 2px solid #1d1d1d;
+  }
+
+  .phone-screen{
+    width:100%;
+    height:100%;
+    border-radius: 32px;
+    background: #f4efe9;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.15);
+    position: relative;
+  }
+
+  .phone-notch{
+    position:absolute;
+    top: 10px;
+    left:50%;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 30px;
+    background: #111;
+    border-radius: 20px;
+    z-index: 3;
+  }
+
+  .phone-status{
+    position:absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+    color: var(--dark);
+    font-size: 1.1rem;
+    z-index: 4;
+    font-weight:700;
+  }
+
+  .phone-status .time {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .preview-frame{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:none;
+    background:#fff;
+  }
+
+  .gallery-action-row{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top: 10px;
+  }
+
+  .gallery-back-btn{
+    background:white;
+    color:var(--dark);
+    border:1px solid #e8dfd3;
+    border-radius:999px;
+    padding: 12px 22px;
+    font-weight:700;
+    cursor:pointer;
+  }
+
+  .gallery-order-btn{
+    background: var(--gold);
+    color:#fff;
+    border:none;
+    border-radius:999px;
+    padding: 14px 26px;
+    font-weight:700;
+    cursor:pointer;
+  }
+
+  @media (max-width: 900px){
+    .models-grid-gallery{
+      grid-template-columns: repeat(2, minmax(0,1fr));
+    }
+  }
+
+  @media (max-width: 560px){
+    .models-grid-gallery{
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 </head>
 
 <body>
@@ -800,8 +1045,8 @@
             Voir les formules
           </a>
 
-          <a href="#modeles" class="button button-secondary">
-            Voir les modèles
+          <a href="galerie.html" class="button button-secondary">
+            Voir mes modèles
           </a>
         </div>
       </div>
@@ -1309,6 +1554,8 @@
           Votre navigateur ne prend pas en charge la vidéo.
       </video>
     </section>
+
+    
     
   </main>
 

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrêtA. | Galerie des modèles</title>
+
+  <style>
+    :root {
+      --ivory: #f8f4ef;
+      --gold: #b9985d;
+      --dark: #2e241f;
+      --muted: #6d615d;
+      --white: #fff;
+      --shadow: 0 16px 36px rgba(30, 20, 17, .12);
+      --light-border: #eadfce;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-width: 320px;
+      font-family: Arial, sans-serif;
+      background: var(--ivory);
+      color: var(--dark);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* En-tête */
+    .topbar {
+      padding: 18px 0;
+      background: #efe2c9;
+      border-bottom: 1px solid #e7dccd;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      color: #111;
+      font-family: Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .back-home {
+      padding: 11px 18px;
+      border: 1px solid var(--light-border);
+      border-radius: 999px;
+      background: var(--white);
+      font-weight: bold;
+    }
+
+    /* Galerie */
+    .gallery-page {
+      padding: 40px 0 80px;
+    }
+
+    .gallery-title {
+      margin-bottom: 26px;
+      text-align: center;
+    }
+
+    .gallery-title h1 {
+      margin-bottom: 8px;
+      font-family: Georgia, serif;
+      font-size: clamp(2.1rem, 4vw, 3rem);
+      font-weight: normal;
+    }
+
+    .gallery-title p {
+      color: var(--muted);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .model-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--light-border);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: var(--shadow);
+      animation: cardGlow 4s ease-in-out infinite;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .model-card:nth-child(2n) {
+      animation-delay: -2s;
+    }
+
+    .model-card:nth-child(3n) {
+      animation-delay: -1s;
+    }
+
+    @keyframes cardGlow {
+      0%, 100% {
+        box-shadow: 0 16px 36px rgba(30, 20, 17, .10);
+      }
+      50% {
+        box-shadow: 0 20px 40px rgba(185, 152, 93, .22);
+      }
+    }
+
+    .model-cover {
+      display: block;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      overflow: hidden;
+      padding: 0;
+      border: 0;
+      background: #f8f4ef;
+      cursor: pointer;
+    }
+
+    .model-cover img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+
+    .model-body {
+      padding: 18px 18px 20px;
+    }
+
+    .model-name {
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-family: Georgia, serif;
+      font-size: 1.5rem;
+    }
+
+    .model-price {
+      margin-bottom: 16px;
+      color: var(--gold);
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .discover-btn {
+      width: 100%;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    /* Détail et mockup du téléphone */
+    .detail-page {
+      display: none;
+      padding: 24px 0 60px;
+    }
+
+    .detail-page.active {
+      display: block;
+    }
+
+    .back-top-btn {
+      margin-bottom: 18px;
+    }
+
+    .phone-wrap {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin: 0 auto 20px;
+    }
+
+    .phone-mockup {
+      position: relative;
+      width: min(100%, 380px);
+      aspect-ratio: 0.52;
+      overflow: hidden;
+      padding: 8px;
+      border: 2px solid #111;
+      border-radius: 38px;
+      background: #171717;
+      box-shadow: 0 28px 60px rgba(0, 0, 0, .2);
+    }
+
+    .phone-screen {
+      position: absolute;
+      inset: 8px;
+      overflow: hidden;
+      border-radius: 29px;
+      background: #fff;
+    }
+
+    .invitation-frame {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+
+      /* Laisse le navigateur transmettre le geste vertical à l'iframe. */
+      touch-action: pan-y;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .phone-notch {
+      position: absolute;
+      z-index: 2;
+      top: 8px;
+      left: 50%;
+      width: 112px;
+      height: 24px;
+      transform: translateX(-50%);
+      border-radius: 0 0 16px 16px;
+      background: #111;
+      pointer-events: none;
+    }
+
+    .phone-time {
+      position: absolute;
+      z-index: 3;
+      top: 10px;
+      left: 15px;
+      color: #111;
+      font-size: .7rem;
+      font-weight: bold;
+      pointer-events: none;
+    }
+
+    .detail-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .secondary-btn,
+    .order-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--light-border);
+      background: var(--white);
+      color: var(--dark);
+    }
+
+    .order-btn {
+      border: 0;
+      background: var(--gold);
+      color: #fff;
+    }
+
+    /* Survol uniquement sur les appareils avec une souris */
+    @media (hover: hover) and (pointer: fine) {
+      .model-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 24px 48px rgba(48, 41, 35, .18);
+      }
+
+      .model-card:hover .model-cover img {
+        transform: scale(1.03);
+      }
+
+      .model-cover img {
+        transition: transform .5s ease;
+      }
+
+      .discover-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(185, 151, 91, .3);
+      }
+    }
+
+    /* Tablette et téléphone : deux cartes par ligne */
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 24px, 1100px);
+      }
+
+      .topbar {
+        padding: 14px 0;
+      }
+
+      .gallery-page {
+        padding: 28px 0 48px;
+      }
+
+      .gallery-title {
+        margin-bottom: 20px;
+      }
+
+      .gallery-title h1 {
+        font-size: 2rem;
+      }
+
+      .gallery-grid {
+        gap: 12px;
+      }
+
+      .model-card {
+        border-radius: 18px;
+      }
+
+      .model-body {
+        padding: 12px;
+      }
+
+      .model-name {
+        font-size: 1.1rem;
+      }
+
+      .model-price {
+        margin-bottom: 12px;
+        font-size: .9rem;
+      }
+
+      .discover-btn {
+        padding: 10px 8px;
+        font-size: .9rem;
+      }
+
+      .detail-page {
+        padding: 18px 0 36px;
+      }
+
+      .phone-mockup {
+        width: min(82vw, 340px);
+        border-radius: 34px;
+      }
+
+      .phone-screen {
+        border-radius: 26px;
+      }
+
+      .detail-actions {
+        gap: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    /* Animation continue des cartes */
+@keyframes carteFlottante {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.model-card {
+  animation: carteFlottante 3.8s ease-in-out infinite;
+}
+
+.model-card:nth-child(2n) {
+  animation-delay: -1.9s;
+}
+
+.model-card:nth-child(3n) {
+  animation-delay: -2.8s;
+}
+
+/* Reflet animé sur les couvertures */
+.model-cover {
+  position: relative;
+}
+
+.model-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, .3) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  animation: refletPhoto 5s ease-in-out infinite;
+}
+
+@keyframes refletPhoto {
+  0%, 35% {
+    transform: translateX(-120%);
+  }
+  75%, 100% {
+    transform: translateX(120%);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .model-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .model-card,
+  .model-cover::after {
+    animation: none !important;
+  }
+}
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand">PrêtA.</a>
+      <a href="index.html" class="back-home">Accueil</a>
+    </div>
+  </header>
+
+  <main class="gallery-page">
+    <div class="container">
+      <div class="gallery-title">
+        <h1>Mes modèles d’invitations</h1>
+        <p>Découvrez chaque invitation de mariage en un clic.</p>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </div>
+  </main>
+
+  <section id="detailPage" class="detail-page">
+    <div class="container">
+      <button
+        class="secondary-btn back-top-btn"
+        id="backToGrid"
+        type="button"
+        aria-label="Retourner à la galerie des modèles"
+      >
+        ← Retour à la galerie
+      </button>
+
+      <div class="phone-wrap">
+        <div class="phone-mockup">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-time">02:09</div>
+
+            <iframe
+              id="invitationFrame"
+              class="invitation-frame"
+              title="Invitation de mariage"
+              scrolling="yes"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-actions">
+        <button class="order-btn" id="orderBtn" type="button">
+          Commander
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const models = [
+      {
+        name: "Premium doré",
+        price: "25 000 FCFA",
+        cover: "premiumdoré.jpeg",
+        link: "https://formulepremium.netlify.app"
+      },
+      {
+        name: "Premium rose",
+        price: "25 000 FCFA",
+        cover: "premiumrose.jpeg",
+        link: "https://premiumrose.netlify.app"
+      },
+      {
+        name: "Premium vert",
+        price: "25 000 FCFA",
+        cover: "premiumvert.jpeg",
+        link: "https://invitationpremiumvert.netlify.app"
+      },
+      {
+        name: "Simple terracota",
+        price: "10 000 FCFA",
+        cover: "terracota.jpeg",
+        link: "https://srouge.netlify.app"
+      },
+      {
+        name: "Doré-simple",
+        price: "10 000 FCFA",
+        cover: "smpledoré.jpeg",
+        link: "https://simpledore.netlify.app"
+      }
+    ];
+
+    const galleryGrid = document.getElementById("galleryGrid");
+    const galleryPage = document.querySelector(".gallery-page");
+    const detailPage = document.getElementById("detailPage");
+    const frame = document.getElementById("invitationFrame");
+    const backToGridBtn = document.getElementById("backToGrid");
+    const orderBtn = document.getElementById("orderBtn");
+
+    const whatsappLink =
+      "https://wa.me/221777600698?text=Bonjour%20PrêtA%2C%20je%20souhaite%20commander%20une%20invitation.";
+
+    function renderGallery() {
+      galleryGrid.innerHTML = models.map((model, index) => `
+        <article class="model-card">
+          <button
+            class="model-cover"
+            data-index="${index}"
+            type="button"
+            aria-label="Découvrir ${model.name}"
+          >
+            <img
+              src="${model.cover}"
+              alt="Couverture du modèle ${model.name}"
+              loading="lazy"
+            >
+          </button>
+
+          <div class="model-body">
+            <div class="model-name">${model.name}</div>
+            <div class="model-price">${model.price}</div>
+            <button
+              class="discover-btn"
+              data-index="${index}"
+              type="button"
+            >
+              Découvrir
+            </button>
+          </div>
+        </article>
+      `).join("");
+
+      galleryGrid
+        .querySelectorAll(".model-cover, .discover-btn")
+        .forEach((button) => {
+          button.addEventListener("click", () => {
+            const index = Number(button.dataset.index);
+            openModel(models[index]);
+          });
+        });
+    }
+
+    function openModel(model) {
+      frame.src = model.link;
+      galleryPage.style.display = "none";
+      detailPage.classList.add("active");
+
+      orderBtn.onclick = () => {
+        window.open(whatsappLink, "_blank", "noopener,noreferrer");
+      };
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    backToGridBtn.addEventListener("click", () => {
+      detailPage.classList.remove("active");
+      galleryPage.style.display = "";
+      frame.src = "about:blank";
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    renderGallery();
+  </script>
+</body>
+</html>
